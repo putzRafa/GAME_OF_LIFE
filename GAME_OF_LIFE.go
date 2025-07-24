@@ -52,6 +52,27 @@ func criaGradeRand() [10][10]int {
 	return matriz
 }
 
+//EM DESENVOLVIMENTO
+/*
+func contVizinhos(matriz [10][10]int)  {
+	var i, j int
+	var linha, coluna int
+	var vizinhoVivo int
+
+	linha = len(matriz)
+	coluna = len(matriz[0])
+
+	for linha = i-1; linha <= i+1; i++{
+		for coluna = j-1; coluna <= j+1; j++{
+			if linha == i && coluna == j {
+				continue
+			}
+
+		}
+	}
+
+}*/
+
 func main() {
 	var grade [10][10]int
 	var opcao int
@@ -62,12 +83,16 @@ func main() {
 
 	fmt.Scanln(&opcao)
 	if opcao == 1 {
+		fmt.Println("-----------------------SELECÃO MANUAL-----------------------")
+		fmt.Println("Escolha o local onde deseja colocar a célula. Ex: 1 1")
+		fmt.Println("Digite -1-1 para confirmar")
 		grade = criaGradeManual()
 	} else {
 		if opcao == 2 {
 			grade = criaGradeRand()
 		} else {
 			fmt.Println("OPÇÃO INVÁLIDA")
+			fmt.Scanln(&opcao)
 		}
 	}
 	imprimeMatriz(grade)
