@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 func imprimeMatriz(matriz [10][10]int) {
@@ -52,26 +53,56 @@ func criaGradeRand() [10][10]int {
 	return matriz
 }
 
-//EM DESENVOLVIMENTO
-/*
-func contVizinhos(matriz [10][10]int)  {
-	var i, j int
-	var linha, coluna int
-	var vizinhoVivo int
+func condicoes(matriz [10][10]int) [10][10]int {
+	var novaMatriz [10][10]int
+	var i, ni int
+	var j, nj int
+	var dx int
+	var dy int
+	var vizinhosVivos int
 
-	linha = len(matriz)
-	coluna = len(matriz[0])
+	// Percorrer cada célula da matriz
+	for i = 0; i < 10; i++ {
+		for j = 0; j < 10; j++ {
+			vizinhosVivos = 0
 
-	for linha = i-1; linha <= i+1; i++{
-		for coluna = j-1; coluna <= j+1; j++{
-			if linha == i && coluna == j {
-				continue
+			// Verifica todos os vizinhos ao redor
+			for dx = -1; dx <= 1; dx++ {
+				for dy = -1; dy <= 1; dy++ {
+					if dx == 0 && dy == 0 {
+						continue // ignora a própria célula
+					}
+
+					// Coordenadas do vizinho
+					ni = i + dx
+					nj = j + dy
+
+					if ni >= 0 && ni < 10 && nj >= 0 && nj < 10 {
+						if matriz[ni][nj] == 1 {
+							vizinhosVivos++
+						}
+					}
+				}
 			}
 
+			// Aplica as regras
+			if matriz[i][j] == 1 {
+				if vizinhosVivos < 2 || vizinhosVivos > 3 {
+					novaMatriz[i][j] = 0 // morre
+				} else {
+					novaMatriz[i][j] = 1 // sobrevive
+				}
+			} else {
+				if vizinhosVivos == 3 {
+					novaMatriz[i][j] = 1 // nasce
+				} else {
+					novaMatriz[i][j] = 0 // continua morta
+				}
+			}
 		}
 	}
-
-}*/
+	return novaMatriz
+}
 
 func main() {
 	var grade [10][10]int
@@ -96,4 +127,11 @@ func main() {
 		}
 	}
 	imprimeMatriz(grade)
+
+	for {
+		grade = condicoes(grade)
+		fmt.Println("\nNOVA GERAÇÃO")
+		imprimeMatriz(grade)
+		time.Sleep(time.Second)
+	}
 }
