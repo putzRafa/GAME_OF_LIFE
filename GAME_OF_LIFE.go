@@ -104,8 +104,21 @@ func condicoes(matriz [10][10]int) [10][10]int {
 	return novaMatriz
 }
 
+func matrizesIguais(matrizA, matrizB [10][10]int) bool {
+	var i, j int
+	for i = 0; i < 10; i++ {
+		for j = 0; j < 10; j++ {
+			if matrizA[i][j] != matrizB[i][j] {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 func main() {
 	var grade [10][10]int
+	var novaGrade [10][10]int
 	var opcao int
 
 	fmt.Println("Selecione a opção que deseja:")
@@ -129,9 +142,17 @@ func main() {
 	imprimeMatriz(grade)
 
 	for {
+
+		novaGrade = condicoes(grade)
+
+		if matrizesIguais(novaGrade, grade) {
+			fmt.Println("\nNENHUMA MUDANÇA DETECTADA — FIM DO JOGO")
+			break
+		}
+
 		grade = condicoes(grade)
 		fmt.Println("\nNOVA GERAÇÃO")
 		imprimeMatriz(grade)
-		time.Sleep(time.Second)
+		time.Sleep(time.Second * 2)
 	}
 }
