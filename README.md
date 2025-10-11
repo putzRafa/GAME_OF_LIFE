@@ -5,7 +5,7 @@ O algoritmo funciona de duas maneiras, criação manual das células, onde você
                                                                                           Obrigado por ler
                                                                                                 : )
 
-   ----------------------------------------------------X-------------------------------------------------------------
+  -------------------------------------------------------X-------------------------------------------------------------
 This is a small personal project, where i attempt to explore the knowledge from the first semester of Sotware Engineering Faculty. This program is a simple cells generetion algorithm, where we can observe 
 their evolution as generation pass. 
 
